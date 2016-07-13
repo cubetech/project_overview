@@ -26,7 +26,7 @@ class OverviewController < ApplicationController
       @stale = true
     end
     if Setting.plugin_project_overview.has_key?(:exclude_projects)
-      scope = scope.where("id NOT IN (?)", Setting.plugin_project_overview[:exclude_projects])
+      scope = scope.where("id NOT IN (?) AND parent_id NOT IN (?)", Setting.plugin_project_overview[:exclude_projects], Setting.plugin_project_overview[:exclude_projects])
     end
 
     scope = scope.visible

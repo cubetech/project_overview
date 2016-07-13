@@ -2,7 +2,7 @@
 
 <% active = true %>
 <% if Setting.plugin_project_overview[:stale_enable] %>
-	<% active = (current_version && Redmine::Activity::Fetcher.new(User.current, :project => project, :with_subprojects => true).events(Time.now - Setting.plugin_project_overview[:stale_num_days].to_i.days, Time.now).any?) %>
+	<% active = (Redmine::Activity::Fetcher.new(User.current, :project => project, :with_subprojects => true).events(Time.now - Setting.plugin_project_overview[:stale_num_days].to_i.days, Time.now).any?) %>
 <% end %>
 
 <% if active || @stale || project.archived? || !project.active? %>
